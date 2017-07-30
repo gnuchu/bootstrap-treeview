@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-(1..10).each do |e|
+(1..30).each do |e|
   e = Environment.create!(name: "Environment_#{e}")
-  (1..4).each do |number|
+  (1..8).each do |number|
     s = Server.create!(name: "Server_#{number}", environment: e)
     asv = Appserver.create!(name: "Appserver_#{number}", server: s)
     app = App.create!(name: "App_#{number}", appserver: asv)

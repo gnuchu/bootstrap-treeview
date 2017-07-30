@@ -1,5 +1,6 @@
 class AppserversController < ApplicationController
   before_action :set_appserver, only: [:show, :edit, :update, :destroy]
+  before_action :sidebar_data
 
   # GET /appservers
   # GET /appservers.json

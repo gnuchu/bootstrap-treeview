@@ -1,5 +1,6 @@
 class ServersController < ApplicationController
   before_action :set_server, only: [:show, :edit, :update, :destroy]
+  before_action :sidebar_data
 
   # GET /servers
   # GET /servers.json

@@ -1,5 +1,6 @@
 class EnvironmentsController < ApplicationController
   before_action :set_environment, only: [:show, :edit, :update, :destroy]
+  before_action :sidebar_data
 
   # GET /environments
   # GET /environments.json

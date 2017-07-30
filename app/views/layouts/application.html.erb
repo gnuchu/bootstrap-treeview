@@ -9,13 +9,41 @@
   </head>
 
   <body>
+    <script type="text/javascript">
+      $(function(){
+
+        if (typeof(Storage) !== "undefined") {
+          // Code for localStorage/sessionStorage.
+          var menudata = localStorage.getItem('menudata')
+          if(menudata === null) {
+            var menudata = '<%= @sidebar_data["tree"].to_json.to_s.html_safe %>';
+          }
+        } else {
+          // Sorry! No Web Storage support..
+          var menudata = '<%= @sidebar_data["tree"].to_json.to_s.html_safe %>';
+        }
+
+        $('#treeview').treeview({
+          data: menudata,
+          expandIcon: "glyphicon glyphicon-stop",
+          collapseIcon: "glyphicon glyphicon-unchecked"
+        });
+
+        $('#treeview').on('nodeSelected', function(event, data) {
+          var obj = $('#treeview').treeview(true).getAllNodes();
+          localStorage.setItem('menudata',JSON.stringify(obj));
+          $('main').load(data.url);
+        });
+      });
+    </script>
     <div class="container">
       <div class="col-md-3">
+        <div id="treeview"></div>
+        <%= yield :sidebar %>
+      </div>
+      <div class="col-md-9" id="main">
         <%= yield %>
       </div>
-      <div class="col-md-9">
-      </div>
-    </div
-    
+    </div>
   </body>
 </html>
